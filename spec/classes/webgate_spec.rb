@@ -8,6 +8,7 @@ describe 'oracle_webgate' do
            :serverId        => 'testServerId',
            :hostname        => 'test.example.com',
            :webgateId       => 'testWebgateId',
+           :port            => 'port',
            :password        => 'password',
            :passphrase      => 'passphrase',
            :certFile        => '/path/to/certFile',

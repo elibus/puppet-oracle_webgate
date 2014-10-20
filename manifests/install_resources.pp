@@ -35,7 +35,7 @@ class oracle_webgate::install_resources {
       logoutput => false,
     }
 
-    Exec["create ${oracle_webgate::downloadDir} directory"]                           ->
+    Exec["create ${oracle_webgate::downloadDir} directory"]                          ->
     Exec["retrieve ${oracle_webgate::remoteRepo}/${oracle_webgate::installPackage}"] ->
     Exec["extract ${oracle_webgate::downloadDir}/${oracle_webgate::installPackage}"]
 

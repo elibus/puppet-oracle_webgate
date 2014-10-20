@@ -10,6 +10,7 @@
 class oracle_webgate (
   $serverId          = $oracle_webgate::params::serverId,
   $hostname          = $oracle_webgate::params::hostname,
+  $port              = $oracle_webgate::params::port,
   $webgateId         = $oracle_webgate::params::webgateId,
   $password          = $oracle_webgate::params::password,
   $passphrase        = $oracle_webgate::params::passphrase,
@@ -46,7 +47,13 @@ class oracle_webgate (
   validate_string($oracle_webgate::installLang)
   validate_string($oracle_webgate::group)
 
-  class { 'oracle_webgate::install': } ->
-  class { 'oracle_webgate::config': }  ->
-  Class['oracle_webgate']
+  # $found = oracle_webgate_exists( $oracleHome )
+  $found = false
+  if ( ! $found ) {
+    notify {"oracle_webgate::install ${$oracle_webgate::installLocation} does not exists":}
+
+    class { 'oracle_webgate::install': } ->
+    class { 'oracle_webgate::config': }  ->
+    Class['oracle_webgate']
+  }
 }

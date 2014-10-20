@@ -6,6 +6,7 @@
 class oracle_webgate::params (
   $serverId          = undef,
   $hostname          = undef,
+  $port              = undef,
   $webgateId         = undef,
   $password          = undef,
   $passphrase        = undef,
@@ -26,12 +27,12 @@ class oracle_webgate::params (
   {
   case $::osfamily {
     'RedHat': {
-      $user              = 'apache'
-      $group             = 'apache'
+      $user  = 'apache'
+      $group = 'apache'
     }
     'Debian': {
-      $user            = 'httpd'
-      $group           = 'httpd'
+      $user  = 'httpd'
+      $group = 'httpd'
     }
     default: {
       fail("${::operatingsystem} not supported")

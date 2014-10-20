@@ -16,6 +16,9 @@ class oracle_webgate (
   $certFile          = $oracle_webgate::params::certFile,
   $keyFile           = $oracle_webgate::params::keyFile,
   $chainFile         = $oracle_webgate::params::chainFile,
+  $installPackage    = $oracle_webgate::params::installPackage,
+  $remoteRepo        = $oracle_webgate::params::remoteRepo,
+  $downloadDir       = $oracle_webgate::params::downloadDir,
   $installLocation   = $oracle_webgate::params::installLocation,
   $user              = $oracle_webgate::params::user,
   $group             = $oracle_webgate::params::group,
@@ -25,20 +28,23 @@ class oracle_webgate (
 ) inherits oracle_webgate::params {
 
   # validate parameters here
-  validate_string($serverId)
-  validate_string($hostname)
-  validate_string($webgateId)
-  validate_string($password)
-  validate_string($passphrase)
-  validate_absolute_path($certFile)
-  validate_absolute_path($keyFile)
-  validate_absolute_path($chainFile)
-  validate_absolute_path($installLocation)
-  validate_string($user)
-  validate_string($group)
-  validate_string($defaultLang)
-  validate_string($installLang)
-  validate_string($group)
+  validate_string($oracle_webgate::serverId)
+  validate_string($oracle_webgate::hostname)
+  validate_string($oracle_webgate::webgateId)
+  validate_string($oracle_webgate::password)
+  validate_string($oracle_webgate::passphrase)
+  validate_absolute_path($oracle_webgate::certFile)
+  validate_absolute_path($oracle_webgate::keyFile)
+  validate_absolute_path($oracle_webgate::chainFile)
+  validate_absolute_path($oracle_webgate::downloadDir)
+  validate_string($oracle_webgate::remoteRepo)
+  validate_string($oracle_webgate::installPackage)
+  validate_absolute_path($oracle_webgate::installLocation)
+  validate_string($oracle_webgate::user)
+  validate_string($oracle_webgate::group)
+  validate_string($oracle_webgate::defaultLang)
+  validate_string($oracle_webgate::installLang)
+  validate_string($oracle_webgate::group)
 
   class { 'oracle_webgate::install': } ->
   class { 'oracle_webgate::config': }  ->

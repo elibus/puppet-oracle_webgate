@@ -25,23 +25,22 @@ class oracle_webgate (
 ) inherits oracle_webgate::params {
 
   # validate parameters here
-  validate_string(serverId)
-  validate_string(hostname)
-  validate_string(webgateId)
-  validate_string(password)
-  validate_string(passphrase)
-  validate_absolute_path(certFile)
-  validate_absolute_path(keyFile)
-  validate_absolute_path(chainFile)
-  validate_absolute_path(installLocation)
-  validate_strin(user)
-  validate_string(group)
-  validate_string(defaultLang)
-  validate_string(installLang)
-  validate_string(group)
+  validate_string($serverId)
+  validate_string($hostname)
+  validate_string($webgateId)
+  validate_string($password)
+  validate_string($passphrase)
+  validate_absolute_path($certFile)
+  validate_absolute_path($keyFile)
+  validate_absolute_path($chainFile)
+  validate_absolute_path($installLocation)
+  validate_string($user)
+  validate_string($group)
+  validate_string($defaultLang)
+  validate_string($installLang)
+  validate_string($group)
 
   class { 'oracle_webgate::install': } ->
-  class { 'oracle_webgate::config': } ~>
-  class { 'oracle_webgate::service': } ->
+  class { 'oracle_webgate::config': }  ->
   Class['oracle_webgate']
 }

@@ -3,8 +3,17 @@ require 'spec_helper'
 describe 'oracle_webgate' do
   context 'supported operating systems' do
     ['Debian', 'RedHat'].each do |osfamily|
-      describe "oracle_webgate class without any parameters on #{osfamily}" do
-        let(:params) {{ }}
+      describe "oracle_webgate class with parameters on #{osfamily}" do
+        let(:params) {{
+           :serverId         => 'testServerId',
+           :hostname         => 'test.example.com',
+           :webgateId        => 'testWebgateId',
+           :password         => 'password',
+           :passphrase       => 'passphrase',
+           :certFile         => '/path/to/certFile',
+           :keyFile          => '/path/to/keyFile',
+           :chainFile        => '/path/to/chainFile'
+        }}
         let(:facts) {{
           :osfamily => osfamily,
         }}
@@ -14,10 +23,6 @@ describe 'oracle_webgate' do
         it { should contain_class('oracle_webgate::params') }
         it { should contain_class('oracle_webgate::install').that_comes_before('oracle_webgate::config') }
         it { should contain_class('oracle_webgate::config') }
-        it { should contain_class('oracle_webgate::service').that_subscribes_to('oracle_webgate::config') }
-
-        it { should contain_service('oracle_webgate') }
-        it { should contain_package('oracle_webgate').with_ensure('present') }
       end
     end
   end

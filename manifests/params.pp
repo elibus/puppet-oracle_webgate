@@ -12,27 +12,23 @@ class oracle_webgate::params (
   $certFile          = undef,
   $keyFile           = undef,
   $chainFile         = undef,
-  $installLocation   = "/opt/netpoint/webgate/access",
-  $user              = "apache",
-  $group             = "apache",
-  $defaultLang       = "en-us",
-  $installLang       = "en-us",
-  $securityMode      = "cert",
-  $install           = "install",
-  $autoUpdate        = "No",
-  $launchBrowser     = "No",
+  $installLocation   = '/opt/netpoint/webgate/access',
+  $defaultLang       = 'en-us',
+  $installLang       = 'en-us',
+  $securityMode      = 'cert',
+  $install           = 'install',
+  $autoUpdate        = 'No',
+  $launchBrowser     = 'No',
   )
   {
-  case $::osfamily{
-    'RedHat' {
-      installLocation   => "/opt/netpoint/webgate/access",
-      user              => "apache",
-      group             => "apache",
+  case $::osfamily {
+    'RedHat': {
+      $user              = 'apache'
+      $group             = 'apache'
     }
-    'Debian' {
-        installLocation => "/opt/netpoint/webgate/access",
-        user            => "httpd",
-        group           => "httpd",
+    'Debian': {
+      $user            = 'httpd'
+      $group           = 'httpd'
     }
     default: {
       fail("${::operatingsystem} not supported")

@@ -2,13 +2,13 @@
 #
 class oracle_webgate::install {
   $execPath = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
-  #$zipFile =  $oracle_webgate::installPackage
-  #$installCmd = inline_template('<%= File.basename(@zipFile, File.extname(@zipFile)) %>')
-  $installCmd = 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate'
+  $zipFile =  $oracle_webgate::installPackage
+  $installCmd = inline_template('<%= File.basename(@zipFile, File.extname(@zipFile)) %>')
 
-  exec { 'run webgate install':
-    command => "./${installCmd} -silent \
-      -W gccLibraryLocationBean.libraryLocation=${oracle_webgate::installPackage} \
+  exec { "run webgate install: ${oracle_webgate::downloadDir}/${installCmd}":
+    command   => "${oracle_webgate::downloadDir}/${installCmd} \
+      -silent \
+      -W gccLibraryLocationBean.libraryLocation=${oracle_webgate::downloadDir} \
       -P webgate.installLocation=${oracle_webgate::installLocation} \
       -W localePanel.defaultLang=${oracle_webgate::defaultLang} \
       -W localePanel.installLanguages=${oracle_webgate::installLang} \
@@ -28,8 +28,9 @@ class oracle_webgate::install {
       -W copyCertificatesInputBean.chainFile=${oracle_webgate::downloadDir}/chainFile.pem \
       -W askAutoUpdateWSBean.askAutoUpdateWSField=No \
       -W askLaunchBrowserBean.launchBrowser=No",
-    path    => $execPath,
-    creates => "${oracle_webgate::installLocation}/access/oblix/tools/configureWebGate/configureWebGate"
+    path      => $execPath,
+    creates   => "${oracle_webgate::installLocation}/access/oblix/tools/configureWebGate/configureWebGate",
+    logoutput => true
   }
 
   class { 'oracle_webgate::install_resources': } ->

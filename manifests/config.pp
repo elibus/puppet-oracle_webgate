@@ -16,7 +16,7 @@ class oracle_webgate::config {
       -P ${oracle_webgate::password} \
       -h ${oracle_webgate::hostname} \
       -p ${oracle_webgate::port} \
-      -a ${oracle_webgate::install} \
+      -a ${oracle_webgate::serverId} \
       -r ${oracle_webgate::passphrase}",
     path    => $execPath
   }

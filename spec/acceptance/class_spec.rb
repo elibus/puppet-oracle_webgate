@@ -13,12 +13,12 @@ describe 'oracle_webgate class' do
            port            => 'port',
            password        => 'password',
            passphrase      => 'passphrase',
-           certFile        => '/path/to/certFile',
-           keyFile         => '/path/to/keyFile',
-           chainFile       => '/path/to/chainFile',
+           certFile        => 'puppet:///modules/oracle_webgate/certFile.pem',
+           keyFile         => 'puppet:///modules/oracle_webgate/keyFile.pem',
+           chainFile       => 'puppet:///modules/oracle_webgate/chainFile.pem',
            downloadDir     => '/tmp/oracle_webgate_install',
            remoteRepo      => 'https://www.dropbox.com/sh/ugru4frg4yt7xtd/AABIg1_-_rSTbG2DHDnIJzYHa',
-           installPackage  => 'https://www.dropbox.com/sh/ugru4frg4yt7xtd/AABIg1_-_rSTbG2DHDnIJzYHa/Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip?dl=0',
+           installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip',
            version         => '10.1.4'
          }
       EOS

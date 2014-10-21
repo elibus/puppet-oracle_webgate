@@ -52,6 +52,7 @@ class oracle_webgate (
   if ( ! $found ) {
     notify {"oracle_webgate::install ${$oracle_webgate::installLocation} does not exists":}
 
+    class { 'oracle_webgate::dependencies': } ->
     class { 'oracle_webgate::install': } ->
     class { 'oracle_webgate::config': }  ->
     Class['oracle_webgate']

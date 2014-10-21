@@ -26,12 +26,13 @@ describe 'oracle_webgate' do
         it { should compile.with_all_deps }
 
         it { should contain_class('oracle_webgate::params') }
+        it { should contain_class('oracle_webgate::dependencies').
+          that_comes_before('oracle_webgate::install') }
         it { should contain_class('oracle_webgate::install_resources').
           that_comes_before('oracle_webgate::install') }
         it { should contain_class('oracle_webgate::install').
           that_comes_before('oracle_webgate::config') }
         it { should contain_class('oracle_webgate::config') }
-
 
         it { should contain_exec('create /tmp/oracle_webgate_install directory') }
         it { should contain_exec('retrieve http://www.example.com/oracle/libgcc_s.so.1') }
@@ -40,14 +41,19 @@ describe 'oracle_webgate' do
         it { should contain_file('/tmp/oracle_webgate_install/keyFile.key') }
         it { should contain_file('/tmp/oracle_webgate_install/chainFile.pem') }
 
-        it { should contain_exec('run webgate install') }
+        it { should contain_exec('run webgate install: /tmp/oracle_webgate_install/Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate') }
         it { should contain_exec('configure webgate') }
 
         it { should contain_exec('create /tmp/oracle_webgate_install directory').
           that_comes_before('Exec[retrieve http://www.example.com/oracle/libgcc_s.so.1]') }
         it { should contain_exec('create /tmp/oracle_webgate_install directory').
           that_comes_before('Exec[retrieve http://www.example.com/oracle/libstdc++.so.6]') }
-
+        it { should contain_exec('create /tmp/oracle_webgate_install directory').
+          that_comes_before('File[/tmp/oracle_webgate_install/certFile.pem]') }
+        it { should contain_exec('create /tmp/oracle_webgate_install directory').
+          that_comes_before('File[/tmp/oracle_webgate_install/chainFile.pem]') }
+        it { should contain_exec('create /tmp/oracle_webgate_install directory').
+          that_comes_before('File[/tmp/oracle_webgate_install/keyFile.key]') }
         it { should contain_exec('create /tmp/oracle_webgate_install directory').
             that_comes_before('Exec[retrieve http://www.example.com/oracle/Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip]') }
         it { should contain_exec('retrieve http://www.example.com/oracle/Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip').

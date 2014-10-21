@@ -10,12 +10,12 @@ class oracle_webgate::params (
   $webgateId         = undef,
   $password          = undef,
   $passphrase        = undef,
-  $certFile          = undef,
-  $keyFile           = undef,
-  $chainFile         = undef,
   $remoteRepo        = undef,
   $installPackage    = undef,
   $version           = undef,
+  $certFile          = 'puppet:///modules/oracle_webgate/certFile.pem',
+  $keyFile           = 'puppet:///modules/oracle_webgate/keyFile.pem',
+  $chainFile         = 'puppet:///modules/oracle_webgate/chainFile.pem',
   $downloadDir       = '/tmp/oracle_webgate_install',
   $installLocation   = '/opt/netpoint/webgate/access',
   $defaultLang       = 'en-us',
@@ -24,6 +24,7 @@ class oracle_webgate::params (
   $install           = 'install',
   $autoUpdate        = 'No',
   $launchBrowser     = 'No',
+  $dependencies      = 'libstdc++.i686',
   )
   {
   case $::osfamily {

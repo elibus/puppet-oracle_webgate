@@ -11,11 +11,11 @@ begin
       log "oracle_webgate_exists #{path}, #{version}"
 
       if is_webgate_installed?(path, version)
-        log 'oracle_webgate_exists ${version} return true'
+        log "oracle_webgate_exists return true"
         return true
       end
 
-      log 'oracle_webgate_exists ${version} return false'
+      log "oracle_webgate_exists return false"
       return false
     end
   end

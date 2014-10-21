@@ -1,7 +1,6 @@
 # == Class oracle_webgate::install_resources
 #
 class oracle_webgate::install_resources {
-
     $execPath = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
 
     File {
@@ -15,6 +14,7 @@ class oracle_webgate::install_resources {
     exec { "create ${oracle_webgate::downloadDir} directory":
       command => "mkdir -p ${oracle_webgate::downloadDir}",
       unless  => "test -d ${oracle_webgate::downloadDir}",
+      creates => $oracle_webgate::downloadDir,
       path    => $execPath
     }
 
@@ -41,12 +41,15 @@ class oracle_webgate::install_resources {
       path    => $execPath
     }
 
+    #$zipFile =  $oracle_webgate::installPackage
+    #$installCmd = inline_template('<%= File.basename(@zipFile, File.extname(@zipFile)) %>')
     exec { "extract ${oracle_webgate::downloadDir}/${oracle_webgate::installPackage}":
       command   => "unzip \
         -o ${oracle_webgate::downloadDir}/${oracle_webgate::installPackage} \
         -d ${oracle_webgate::downloadDir}/",
       timeout   => 0,
       path      => $execPath,
+      creates   => "${oracle_webgate::downloadDir}/${oracle_webgate::install::installCmd}",
       logoutput => false,
     }
 
@@ -71,4 +74,13 @@ class oracle_webgate::install_resources {
 
     Exec["create ${oracle_webgate::downloadDir} directory"] ->
     Exec["retrieve ${oracle_webgate::remoteRepo}/libstdc++.so.6"]
+
+    Exec["create ${oracle_webgate::downloadDir} directory"] ->
+    File["${oracle_webgate::downloadDir}/certFile.pem"]
+
+    Exec["create ${oracle_webgate::downloadDir} directory"] ->
+    File["${oracle_webgate::downloadDir}/keyFile.key"]
+
+    Exec["create ${oracle_webgate::downloadDir} directory"] ->
+    File["${oracle_webgate::downloadDir}/chainFile.pem"]
 }

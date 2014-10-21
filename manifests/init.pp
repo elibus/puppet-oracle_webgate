@@ -58,7 +58,7 @@ class oracle_webgate (
 
     if ( $oracle_webgate::manageDeps ) {
       class { 'oracle_webgate::dependencies':
-        require => Class['oracle_webgate::install']
+        before => Class['oracle_webgate::install']
       }
     }
 

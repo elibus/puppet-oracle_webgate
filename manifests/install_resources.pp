@@ -66,4 +66,9 @@ class oracle_webgate::install_resources {
     Exec["retrieve ${oracle_webgate::remoteRepo}/${oracle_webgate::installPackage}"] ->
     Exec["extract ${oracle_webgate::downloadDir}/${oracle_webgate::installPackage}"]
 
+    Exec["create ${oracle_webgate::downloadDir} directory"] ->
+    Exec["retrieve ${oracle_webgate::remoteRepo}/libgcc_s.so.1"]
+
+    Exec["create ${oracle_webgate::downloadDir} directory"] ->
+    Exec["retrieve ${oracle_webgate::remoteRepo}/libstdc++.so.6"]
 }

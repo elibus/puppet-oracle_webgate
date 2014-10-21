@@ -2,8 +2,9 @@
 #
 class oracle_webgate::install {
   $execPath = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
-  $zipFile =  $oracle_webgate::installPackage
-  $installCmd = inline_template('<%= File.basename(zipFile, File.extname(zipFile)) %>')
+  #$zipFile =  $oracle_webgate::installPackage
+  #$installCmd = inline_template('<%= File.basename(@zipFile, File.extname(@zipFile)) %>')
+  $installCmd = 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate'
 
   exec { 'run webgate install':
     command => "./${installCmd} -silent \

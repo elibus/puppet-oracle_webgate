@@ -26,23 +26,17 @@ class oracle_webgate::install_resources {
       path    => $execPath
     }
 
-    exec { "retrieve ${oracle_webgate::remoteRepo}/libgcc_s.so.1":
-      command => "wget -q ${oracle_webgate::remoteRepo}/libgcc_s.so.1 \
-        -O ${oracle_webgate::downloadDir}/libgcc_s.so.1",
+    exec { "copy to ${oracle_webgate::downloadDir}/libgcc_s.so.1":
+      command => "cp /lib64/libgcc_s.so.1 ${oracle_webgate::downloadDir}/libgcc_s.so.1",
       creates => "${oracle_webgate::downloadDir}/libgcc_s.so.1",
       path    => $execPath
     }
-
-    exec { "retrieve ${oracle_webgate::remoteRepo}/libstdc++.so.6":
-      command => "wget \
-        -q ${oracle_webgate::remoteRepo}/libstdc++.so.6 \
-        -O ${oracle_webgate::downloadDir}/libstdc++.so.6",
+    exec { "copy to ${oracle_webgate::downloadDir}/libstdc++.so.6":
+      command => "cp /usr/lib64/libstdc++.so.6 ${oracle_webgate::downloadDir}/libstdc++.so.6",
       creates => "${oracle_webgate::downloadDir}/libstdc++.so.6",
       path    => $execPath
     }
 
-    #$zipFile =  $oracle_webgate::installPackage
-    #$installCmd = inline_template('<%= File.basename(@zipFile, File.extname(@zipFile)) %>')
     exec { "extract ${oracle_webgate::downloadDir}/${oracle_webgate::installPackage}":
       command   => "unzip \
         -o ${oracle_webgate::downloadDir}/${oracle_webgate::installPackage} \
@@ -70,10 +64,10 @@ class oracle_webgate::install_resources {
     Exec["extract ${oracle_webgate::downloadDir}/${oracle_webgate::installPackage}"]
 
     Exec["create ${oracle_webgate::downloadDir} directory"] ->
-    Exec["retrieve ${oracle_webgate::remoteRepo}/libgcc_s.so.1"]
+    Exec["copy to ${oracle_webgate::downloadDir}/libstdc++.so.6"]
 
     Exec["create ${oracle_webgate::downloadDir} directory"] ->
-    Exec["retrieve ${oracle_webgate::remoteRepo}/libstdc++.so.6"]
+    Exec["copy to ${oracle_webgate::downloadDir}/libgcc_s.so.1"]
 
     Exec["create ${oracle_webgate::downloadDir} directory"] ->
     File["${oracle_webgate::downloadDir}/certFile.pem"]

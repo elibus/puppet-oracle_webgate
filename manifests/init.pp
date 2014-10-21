@@ -33,29 +33,37 @@ class oracle_webgate (
   # validate parameters here
   validate_string($oracle_webgate::serverId)
   validate_string($oracle_webgate::hostname)
+  validate_re($oracle_webgate::port, '\d+')
   validate_string($oracle_webgate::webgateId)
   validate_string($oracle_webgate::password)
   validate_string($oracle_webgate::passphrase)
   validate_string($oracle_webgate::certFile)
   validate_string($oracle_webgate::keyFile)
   validate_string($oracle_webgate::chainFile)
-  validate_absolute_path($oracle_webgate::downloadDir)
-  validate_string($oracle_webgate::remoteRepo)
   validate_string($oracle_webgate::installPackage)
+  validate_string($oracle_webgate::version)
+  validate_bool($oracle_webgate::manageDeps)
+  validate_string($oracle_webgate::remoteRepo)
+  validate_absolute_path($oracle_webgate::downloadDir)
   validate_absolute_path($oracle_webgate::installLocation)
   validate_string($oracle_webgate::user)
   validate_string($oracle_webgate::group)
   validate_string($oracle_webgate::defaultLang)
   validate_string($oracle_webgate::installLang)
-  validate_string($oracle_webgate::group)
+  validate_string($oracle_webgate::securityMode)
 
   $found = oracle_webgate_exists( $oracle_webgate::installLocation, $oracle_webgate::version )
   if ( ! $found ) {
     notify {"oracle_webgate::install ${$oracle_webgate::installLocation} does not exists":}
 
-    class { 'oracle_webgate::dependencies': } ->
-    class { 'oracle_webgate::install': } ->
-    class { 'oracle_webgate::config': }  ->
+    if ( $oracle_webgate::manageDeps ) {
+      class { 'oracle_webgate::dependencies':
+        require => Class['oracle_webgate::install']
+      }
+    }
+
+    class { 'oracle_webgate::install': }      ->
+    class { 'oracle_webgate::config': }       ->
     Class['oracle_webgate']
   }
 }

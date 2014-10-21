@@ -10,7 +10,7 @@ describe 'oracle_webgate class' do
            serverId        => 'testServerId',
            hostname        => 'test.example.com',
            webgateId       => 'testWebgateId',
-           port            => 'port',
+           port            => '5575',
            password        => 'password',
            passphrase      => 'passphrase',
            certFile        => 'puppet:///modules/oracle_webgate/certFile.pem',
@@ -19,7 +19,9 @@ describe 'oracle_webgate class' do
            downloadDir     => '/tmp/oracle_webgate_install',
            remoteRepo      => 'https://www.dropbox.com/sh/ugru4frg4yt7xtd/AABIg1_-_rSTbG2DHDnIJzYHa',
            installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip',
-           version         => '10.1.4'
+           version         => '10.1.4',
+           user            => 'root',
+           group           => 'root'
          }
       EOS
 

@@ -4,7 +4,7 @@
 #
 class oracle_webgate::dependencies {
   package { 'libstdc++.i686':
-    ensure  => latest,
+    ensure  => installed,
     require => Package['libstdc++.x86_64']
   }
 

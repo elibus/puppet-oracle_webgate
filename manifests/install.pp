@@ -29,7 +29,7 @@ class oracle_webgate::install {
       -W askAutoUpdateWSBean.askAutoUpdateWSField=No \
       -W askLaunchBrowserBean.launchBrowser=No",
     path      => $execPath,
-    creates   => "${oracle_webgate::installLocation}/access/oblix/tools/configureWebGate/configureWebGate",
+    creates   => "${oracle_webgate::installLocation}/oblix/tools/configureWebGate/configureWebGate",
     logoutput => true
   }
 

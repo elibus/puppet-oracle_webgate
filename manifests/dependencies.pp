@@ -9,6 +9,7 @@ class oracle_webgate::dependencies {
   }
 
   package { 'libstdc++.x86_64':
-    ensure => latest
+    ensure   => latest,
+    provider => 'yum'
   }
 }

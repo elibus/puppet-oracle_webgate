@@ -75,7 +75,7 @@ describe 'oracle_webgate' do
     end
   end
 
-    context 'unsupported architecture' do
+  context 'unsupported architecture' do
     describe 'oracle_webgate class without any parameters on AIX' do
       let(:facts) {{
         :osfamily     => 'RedHat',

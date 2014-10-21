@@ -11,6 +11,7 @@ class oracle_webgate::install_resources {
       group   => 'root'
     }
 
+    # Create temp directory
     exec { "create ${oracle_webgate::downloadDir} directory":
       command => "mkdir -p ${oracle_webgate::downloadDir}",
       unless  => "test -d ${oracle_webgate::downloadDir}",
@@ -18,6 +19,7 @@ class oracle_webgate::install_resources {
       path    => $execPath
     }
 
+    # Retrieve installation package
     exec { "retrieve ${oracle_webgate::remoteRepo}/${oracle_webgate::installPackage}":
       command => "wget \
         -q ${oracle_webgate::remoteRepo}/${oracle_webgate::installPackage} \
@@ -26,14 +28,18 @@ class oracle_webgate::install_resources {
       path    => $execPath
     }
 
+    # Copy needed libs for the installer.
+    # Crappy Oracle software *requires* this.
     exec { "copy to ${oracle_webgate::downloadDir}/libgcc_s.so.1":
-      command => "cp /${oracle_webgate::params::libdir}/libgcc_s.so.1 ${oracle_webgate::downloadDir}/libgcc_s.so.1",
+      command => "cp /${oracle_webgate::params::libdir}/libgcc_s.so.1 \
+        ${oracle_webgate::downloadDir}/libgcc_s.so.1",
       creates => "${oracle_webgate::downloadDir}/libgcc_s.so.1",
       path    => $execPath
     }
 
     exec { "copy to ${oracle_webgate::downloadDir}/libstdc++.so.6":
-      command => "cp /usr/${oracle_webgate::params::libdir}/libstdc++.so.6 ${oracle_webgate::downloadDir}/libstdc++.so.6",
+      command => "cp /usr/${oracle_webgate::params::libdir}/libstdc++.so.6 \
+        ${oracle_webgate::downloadDir}/libstdc++.so.6",
       creates => "${oracle_webgate::downloadDir}/libstdc++.so.6",
       path    => $execPath
     }
@@ -44,10 +50,12 @@ class oracle_webgate::install_resources {
         -d ${oracle_webgate::downloadDir}/",
       timeout   => 0,
       path      => $execPath,
-      creates   => "${oracle_webgate::downloadDir}/${oracle_webgate::install::installCmd}",
+      creates   =>
+        "${oracle_webgate::downloadDir}/${oracle_webgate::install::installCmd}",
       logoutput => false,
     }
 
+    # Ensure need certificates are in place
     file { "${oracle_webgate::downloadDir}/certFile.pem" :
       content => $oracle_webgate::certFile
     }
@@ -60,6 +68,7 @@ class oracle_webgate::install_resources {
       content => $oracle_webgate::chainFile
     }
 
+    # Dependencies
     Exec["create ${oracle_webgate::downloadDir} directory"]                          ->
     Exec["retrieve ${oracle_webgate::remoteRepo}/${oracle_webgate::installPackage}"] ->
     Exec["extract ${oracle_webgate::downloadDir}/${oracle_webgate::installPackage}"]

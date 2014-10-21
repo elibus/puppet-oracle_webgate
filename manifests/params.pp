@@ -41,4 +41,16 @@ class oracle_webgate::params (
       fail("${::operatingsystem} not supported")
     }
   }
+
+  case $::architecture {
+    'x86_64': {
+      $libdir = 'lib64'
+    }
+    'i686': {
+      $libdir = 'lib'
+    }
+    default: {
+      fail("${::architecture} architecture not supported")
+    }
+  }
 }

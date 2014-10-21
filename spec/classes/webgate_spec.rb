@@ -20,7 +20,8 @@ describe 'oracle_webgate' do
            :version         => '10.1.4',
         }}
         let(:facts) {{
-          :osfamily => osfamily,
+          :osfamily     => osfamily,
+          :architecture => 'x86_64',
         }}
 
         it { should compile.with_all_deps }
@@ -67,9 +68,21 @@ describe 'oracle_webgate' do
       let(:facts) {{
         :osfamily        => 'Solaris',
         :operatingsystem => 'Nexenta',
+        :architecture    => 'x86_64',
       }}
 
       it { expect { should contain_package('oracle_webgate') }.to raise_error(Puppet::Error, /Nexenta not supported/) }
+    end
+  end
+
+    context 'unsupported architecture' do
+    describe 'oracle_webgate class without any parameters on AIX' do
+      let(:facts) {{
+        :osfamily     => 'RedHat',
+        :architecture => 'risc',
+      }}
+
+      it { expect { should contain_package('oracle_webgate') }.to raise_error(Puppet::Error, /architecture not supported/) }
     end
   end
 end

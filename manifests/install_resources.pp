@@ -27,12 +27,13 @@ class oracle_webgate::install_resources {
     }
 
     exec { "copy to ${oracle_webgate::downloadDir}/libgcc_s.so.1":
-      command => "cp /lib64/libgcc_s.so.1 ${oracle_webgate::downloadDir}/libgcc_s.so.1",
+      command => "cp /${oracle_webgate::params::libdir}/libgcc_s.so.1 ${oracle_webgate::downloadDir}/libgcc_s.so.1",
       creates => "${oracle_webgate::downloadDir}/libgcc_s.so.1",
       path    => $execPath
     }
+
     exec { "copy to ${oracle_webgate::downloadDir}/libstdc++.so.6":
-      command => "cp /usr/lib64/libstdc++.so.6 ${oracle_webgate::downloadDir}/libstdc++.so.6",
+      command => "cp /usr/${oracle_webgate::params::libdir}/libstdc++.so.6 ${oracle_webgate::downloadDir}/libstdc++.so.6",
       creates => "${oracle_webgate::downloadDir}/libstdc++.so.6",
       path    => $execPath
     }

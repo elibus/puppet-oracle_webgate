@@ -3,4 +3,22 @@
 # This class is called from oracle_webgate
 #
 class oracle_webgate::config {
+  $execPath = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
+
+  exec { 'run configureWebGate':
+    command => "${oracle_webgate::installLocation}/access/oblix/tools/configureWebGate/configureWebGate \
+      -i ${oracle_webgate::installLocation} \
+      -t WebGate \
+      -w ${oracle_webgate::webgateId} \
+      -m ${oracle_webgate::securityMode} \
+      -c ${oracle_webgate::install} \
+      -S \
+      -P ${oracle_webgate::password} \
+      -h ${oracle_webgate::hostname} \
+      -p ${oracle_webgate::port} \
+      -a ${oracle_webgate::install} \
+      -r ${oracle_webgate::passphrase}",
+    path    => $execPath
+  }
+
 }

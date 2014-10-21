@@ -27,7 +27,8 @@ class oracle_webgate::install {
       -W copyCertificatesInputBean.chainFile=${oracle_webgate::downloadDir}/${oracle_webgate::chainFile} \
       -W askAutoUpdateWSBean.askAutoUpdateWSField=No \
       -W askLaunchBrowserBean.launchBrowser=No",
-    path    => $execPath
+    path    => $execPath,
+    creates => "${oracle_webgate::installLocation}/access/oblix/tools/configureWebGate/configureWebGate"
   }
 
   class { 'oracle_webgate::install_resources': } ->

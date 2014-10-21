@@ -6,6 +6,8 @@ begin
   # restart the puppetmaster when changed
   module Puppet::Parser::Functions
     newfunction(:oracle_webgate_exists, :type => :rvalue) do |args|
+      path = args[0]
+      version = args[1]
       log "oracle_webgate_exists #{path}, #{version}"
 
       if is_webgate_installed?(path, version)
@@ -25,7 +27,7 @@ begin
         doc = REXML::Document.new file
         doc.elements.each('/PRD_LIST/TL_LIST/COMP') do |element|
           ver = element.attributes['VER']
-          return (version == ver)
+          version.eql? ver
         end
       end
     end

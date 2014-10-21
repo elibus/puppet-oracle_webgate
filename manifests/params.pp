@@ -15,6 +15,7 @@ class oracle_webgate::params (
   $chainFile         = undef,
   $remoteRepo        = undef,
   $installPackage    = undef,
+  $version           = undef,
   $downloadDir       = '/tmp/oracle_webgate_install',
   $installLocation   = '/opt/netpoint/webgate/access',
   $defaultLang       = 'en-us',

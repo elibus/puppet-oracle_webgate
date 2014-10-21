@@ -5,7 +5,7 @@
 class oracle_webgate::config {
   $execPath = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:'
 
-  exec { 'run configureWebGate':
+  exec { 'configure webgate':
     command => "${oracle_webgate::installLocation}/access/oblix/tools/configureWebGate/configureWebGate \
       -i ${oracle_webgate::installLocation} \
       -t WebGate \

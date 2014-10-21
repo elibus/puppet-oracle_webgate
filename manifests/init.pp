@@ -18,6 +18,7 @@ class oracle_webgate (
   $keyFile           = $oracle_webgate::params::keyFile,
   $chainFile         = $oracle_webgate::params::chainFile,
   $installPackage    = $oracle_webgate::params::installPackage,
+  $version           = $oracle_webgate::params::version,
   $remoteRepo        = $oracle_webgate::params::remoteRepo,
   $downloadDir       = $oracle_webgate::params::downloadDir,
   $installLocation   = $oracle_webgate::params::installLocation,
@@ -47,8 +48,7 @@ class oracle_webgate (
   validate_string($oracle_webgate::installLang)
   validate_string($oracle_webgate::group)
 
-  # $found = oracle_webgate_exists( $oracleHome )
-  $found = false
+  $found = oracle_webgate_exists( $oracle_webgate::installLocation, $oracle_webgate::version )
   if ( ! $found ) {
     notify {"oracle_webgate::install ${$oracle_webgate::installLocation} does not exists":}
 

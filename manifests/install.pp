@@ -5,7 +5,7 @@ class oracle_webgate::install {
   $zipFile =  $oracle_webgate::installPackage
   $installCmd = inline_template('<%= File.basename(zipFile, File.extname(zipFile)) %>')
 
-  exec { 'run install':
+  exec { 'run webgate install':
     command => "./${installCmd} -silent \
       -W gccLibraryLocationBean.libraryLocation=${oracle_webgate::installPackage} \
       -P webgate.installLocation=${oracle_webgate::installLocation} \
@@ -22,9 +22,9 @@ class oracle_webgate::install {
       -W certModeBean.passphrase=${oracle_webgate::passphrase} \
       -W certModeBean.passphraseVerify=${oracle_webgate::passphrase} \
       -W installOrRequestCertBean.installOrRequest=${oracle_webgate::install} \
-      -W copyCertificatesInputBean.certFile=${oracle_webgate::downloadDir}/${oracle_webgate::certFile} \
-      -W copyCertificatesInputBean.keyFile=${oracle_webgate::downloadDir}/${oracle_webgate::keyFile} \
-      -W copyCertificatesInputBean.chainFile=${oracle_webgate::downloadDir}/${oracle_webgate::chainFile} \
+      -W copyCertificatesInputBean.certFile=${oracle_webgate::downloadDir}/certFile.pem \
+      -W copyCertificatesInputBean.keyFile=${oracle_webgate::downloadDir}/keyFile.key \
+      -W copyCertificatesInputBean.chainFile=${oracle_webgate::downloadDir}/chainFile.pem \
       -W askAutoUpdateWSBean.askAutoUpdateWSField=No \
       -W askLaunchBrowserBean.launchBrowser=No",
     path    => $execPath,

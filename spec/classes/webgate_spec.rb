@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'oracle_webgate' do
   context 'supported operating systems' do
-    ['Debian', 'RedHat'].each do |osfamily|
+    ['RedHat'].each do |osfamily|
       describe "oracle_webgate class with parameters on #{osfamily}" do
         let(:params) {{
            :serverId        => 'testServerId',

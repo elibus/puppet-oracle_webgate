@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/elibus/puppet-oracle_webgate.svg)](https://travis-ci.org/elibus/puppet-oracle_webgate)
+
 ####Table of Contents
 
 1. [Overview](#overview)
@@ -13,31 +15,68 @@
 
 ##Overview
 
-This puppet module will install and configure Oracle Access Manager Webgate.
+This puppet module will install and configure Oracle Access Manager Webgate for Apache on Linux.
 
 ##Module Description
 
-If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
+Oracle Access Manager Webgate has a really crappy installation process, this module automates the installation and configuration process.
+This is what it does:
+ - Download the installation package from a remore repository (http/https)
+ - Create a temp dir where to extract the required content
+ - Install the necessary dependencies (optional)
+ - Copy the system libs requirered by the install (please refer to: http://docs.oracle.com/cd/E15217_01/doc.1014/e12493.pdf)
+ - Copy the OAM certificates
+ - Run the installa process
+ - Run the configuration process
 
-If your module has a range of functionality (installation, configuration, management, etc.) this is the time to mention it.
+This module has been tested on: RedHat 6+ 64 bit + OAM Webgate for Apache 2.4
+It *should* also on 32bit RedHat systems and Debian with 32bit modules and Apache 2.2.
+
+It is compatibile with:
+ - Puppet >= 2.7.0
+ - Ruby >= 1.8.7
+
 
 ##Setup
 
 ###What oracle_webgate affects
-
-* A list of files, packages, services, or operations that the module will alter, impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form. 
+Notes:
+ - The (crappy) Oracle installer *requires* a copy of `libgcc_s.so.1` and `libstdc++.so.6` in a specified directory to work properly. The module will take care of copying those files if they are available
+ - The software will be installed in the default installation path, i.e. `/opt/netgate/access`, this cannot be changed
 
 ###Setup Requirements **OPTIONAL**
 
-If your module requires anything extra before setting up (pluginsync enabled, etc.), mention it here. 
-
+ 
 ###Beginning with oracle_webgate
+
+Before you start, you need:
+ - a working OAM server
+ - OAM Certificates copied either on your puppet server on available in hiera
+ - OAM Webgate installation ZIP file available on a http/https repository
 
 The very basic steps needed for a user to get the module up and running. 
 
-If your most recent release breaks compatibility or requires particular steps for upgrading, you may wish to include an additional section here: Upgrading (For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+      class { 'oracle_webgate':
+        serverId        => 'oamServerId',
+        hostname        => 'oam.example.com',
+        webgateId       => 'thisServer',
+        port            => '5575',
+        password        => 'password',
+        passphrase      => 'passphrase',
+        remoteRepo      => 'https://www.example.com/repo/oracle',
+        installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip',
+      }
+
+Defaults:
+        $manageDeps        = true,
+        $certFile          = 'puppet:///modules/oracle_webgate/certFile.pem',
+        $keyFile           = 'puppet:///modules/oracle_webgate/keyFile.pem',
+        $chainFile         = 'puppet:///modules/oracle_webgate/chainFile.pem',
+        $downloadDir       = '/tmp/oracle_webgate_install',
+        $defaultLang       = 'en-us',
+        $installLang       = 'en-us',
+        $securityMode      = 'cert',
+        $install           = 'install',
 
 ##Usage
 

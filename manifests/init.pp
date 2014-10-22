@@ -22,7 +22,6 @@ class oracle_webgate (
   $manageDeps        = $oracle_webgate::params::manageDeps,
   $remoteRepo        = $oracle_webgate::params::remoteRepo,
   $downloadDir       = $oracle_webgate::params::downloadDir,
-  $installLocation   = $oracle_webgate::params::installLocation,
   $user              = $oracle_webgate::params::user,
   $group             = $oracle_webgate::params::group,
   $defaultLang       = $oracle_webgate::params::defaultLang,
@@ -51,9 +50,8 @@ class oracle_webgate (
   validate_string($oracle_webgate::installLang)
   validate_string($oracle_webgate::securityMode)
 
-
-  if ( ! $::oracle_webgate_exists ) {
-    notify {"oracle_webgate::install ${oracle_webgate::params::installLocation} does not exists":}
+  if ( str2bool($::oracle_webgate_exists) != true ) {
+    notify {'oracle_webgate not found!':}
 
     if ( $oracle_webgate::manageDeps ) {
       class { 'oracle_webgate::dependencies':
@@ -61,8 +59,8 @@ class oracle_webgate (
       }
     }
 
-    class { 'oracle_webgate::install': }      ->
-    class { 'oracle_webgate::config': }       ->
+    class { 'oracle_webgate::install': } ->
+    class { 'oracle_webgate::config': }  ->
     Class['oracle_webgate']
   }
 }

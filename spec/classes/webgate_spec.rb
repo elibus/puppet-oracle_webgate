@@ -20,15 +20,16 @@ describe 'oracle_webgate' do
            :version         => '10.1.4',
         }}
         let(:facts) {{
-          :osfamily     => osfamily,
-          :architecture => 'x86_64',
+          :osfamily              => osfamily,
+          :architecture          => 'x86_64',
+          :oracle_webgate_exists => false
         }}
 
         it { should compile.with_all_deps }
 
         it { should contain_class('oracle_webgate::params') }
         it { should contain_class('oracle_webgate::dependencies').
-          that_requires('Class[oracle_webgate::install]') }
+          that_comes_before('Class[oracle_webgate::install]') }
         it { should contain_class('oracle_webgate::install_resources').
           that_comes_before('oracle_webgate::install') }
         it { should contain_class('oracle_webgate::install').

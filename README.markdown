@@ -29,8 +29,11 @@ This is what it does:
  - Run the installa process
  - Run the configuration process
 
-This module has been tested on: RedHat 6+ 64 bit + OAM Webgate for Apache 2.4
-It *should* also on 32bit RedHat systems and Debian with 32bit modules and Apache 2.2.
+This module has been tested on: 
+ - RedHat 6+ 64 bit + OAM Webgate for Apache 2.4
+
+It *should* work also on:
+ - 32 bits RedHat systems with Apache 2.2
 
 It is compatibile with:
  - Puppet >= 2.7.0
@@ -43,6 +46,7 @@ It is compatibile with:
 Notes:
  - The (crappy) Oracle installer *requires* a copy of `libgcc_s.so.1` and `libstdc++.so.6` in a specified directory to work properly. The module will take care of copying those files if they are available
  - The software will be installed in the default installation path, i.e. `/opt/netgate/access`, this cannot be changed
+ - This module will install `libstc++.i686` *and* upgrade `libstc++.x86_64` to the last version to be sure puppet does not fail installing `libstc++.i686` when a version newer than the `libstc++.x86_64` one is available (see https://projects.puppetlabs.com/issues/23245)
 
 ###Setup Requirements **OPTIONAL**
 
@@ -82,7 +86,13 @@ Defaults
 
 ##Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
+The module does not require any special configuration besides what just showed.
+If you are using puppet 3.0+ you can take the most out of the hiera integration saving your certificates in your hiera data folder, something like this:
+
+      common/
+        oracle_webgate::certFile
+        oracle_webgate::keyFile
+        oracle_webgate::chainFile
 
 ##Reference
 

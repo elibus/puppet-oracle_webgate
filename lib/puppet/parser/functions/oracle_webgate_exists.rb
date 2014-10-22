@@ -1,38 +1,41 @@
 begin
   require 'puppet/util/log'
-  require 'rexml/document'
-  require 'facter'
 
   # restart the puppetmaster when changed
   module Puppet::Parser::Functions
     newfunction(:oracle_webgate_exists, :type => :rvalue) do |args|
-      path = args[0]
-      version = args[1]
-      log "oracle_webgate_exists #{path}, #{version}"
-
-      if is_webgate_installed?(path, version)
-        log "oracle_webgate_exists return true"
+      webgate = lookup_db_var('oracle_webgate_ver')
+      if webgate == 'empty' or webgate == 'NotFound'
+        log 'oracle_webgate_exists return empty -> false'
+        return false
+      else
+        log 'oracle_webgate_exists version #{webgate} -> true'
         return true
       end
-
-      log "oracle_webgate_exists return false"
-      return false
     end
   end
 
-  def is_webgate_installed?(path, version)
-    unless path.nil?
-      if FileTest.exists?(path + '/ContentsXML/comps.xml')
-        file = File.read(path + '/ContentsXML/comps.xml')
-        doc = REXML::Document.new file
-        doc.elements.each('/PRD_LIST/TL_LIST/COMP') do |element|
-          ver = element.attributes['VER']
-          version.eql? ver
-        end
-      end
+  # Copied from
+  # https://github.com/biemond/biemond-oradb/blob/master/lib/puppet/parser/functions/oracle_exists.rb
+  def lookup_db_var(name)
+    # puts "lookup fact "+name
+    if db_var_exists(name)
+      return lookupvar(name).to_s
     end
+    'empty'
+  end
 
-    return false
+  def db_var_exists(name)
+    # puts "lookup fact "+name
+    if lookupvar(name) != :undefined
+      if lookupvar(name).nil?
+        # puts "return false"
+        return false
+      end
+      return true
+    end
+    # puts "not found"
+    false
   end
 
   def log(msg)

@@ -19,6 +19,7 @@ class oracle_webgate::config {
       -a ${oracle_webgate::serverId} \
       -r ${oracle_webgate::passphrase}",
     path      => $execPath,
+    creates   => "${oracle_webgate::installLocation}/oblix/config/random-seed",
     logoutput => true
   }
 

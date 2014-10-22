@@ -67,16 +67,18 @@ The very basic steps needed for a user to get the module up and running.
         installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip',
       }
 
-Defaults:
-        $manageDeps        = true,
-        $certFile          = 'puppet:///modules/oracle_webgate/certFile.pem',
-        $keyFile           = 'puppet:///modules/oracle_webgate/keyFile.pem',
-        $chainFile         = 'puppet:///modules/oracle_webgate/chainFile.pem',
-        $downloadDir       = '/tmp/oracle_webgate_install',
-        $defaultLang       = 'en-us',
-        $installLang       = 'en-us',
-        $securityMode      = 'cert',
-        $install           = 'install',
+Defaults
+
+| Option      | Defaults to                                     | Description                                               |
+|-------------|-------------------------------------------------|-----------------------------------------------------------|
+|manageDeps   | true                                            | Should I install libstc++.i686?                           |
+|certFile     | puppet:///modules/oracle_webgate/certFile.pem   | Certificate file                                          |
+|keyFile      | puppet:///modules/oracle_webgate/keyFile.pem    | Key file                                                  |
+|chainFile    | puppet:///modules/oracle_webgate/chainFile.pem  | Chain file                                                |
+|downloadDir  | /tmp/oracle_webgate_install                     | Temp dir where to download and unzip installation files   |
+|defaultLang  | en-us                                           |                                                           |
+|installLang  | en-us                                           |                                                           |
+|securityMode | cert                                            | See Oracle docs                                           |
 
 ##Usage
 

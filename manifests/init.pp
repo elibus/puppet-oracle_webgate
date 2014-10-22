@@ -18,7 +18,6 @@ class oracle_webgate (
   $keyFile           = $oracle_webgate::params::keyFile,
   $chainFile         = $oracle_webgate::params::chainFile,
   $installPackage    = $oracle_webgate::params::installPackage,
-  $version           = $oracle_webgate::params::version,
   $manageDeps        = $oracle_webgate::params::manageDeps,
   $remoteRepo        = $oracle_webgate::params::remoteRepo,
   $downloadDir       = $oracle_webgate::params::downloadDir,

@@ -19,7 +19,6 @@ describe 'oracle_webgate class' do
            downloadDir     => '/tmp/oracle_webgate_install',
            remoteRepo      => 'https://www.dropbox.com/sh/ugru4frg4yt7xtd/AABIg1_-_rSTbG2DHDnIJzYHa',
            installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip',
-           version         => '10.1.4',
            user            => 'root',
            group           => 'root'
          }

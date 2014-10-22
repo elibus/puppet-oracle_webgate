@@ -17,7 +17,6 @@ describe 'oracle_webgate' do
            :downloadDir     => '/tmp/oracle_webgate_install',
            :remoteRepo      => 'http://www.example.com/oracle',
            :installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip',
-           :version         => '10.1.4',
         }}
         let(:facts) {{
           :osfamily              => osfamily,

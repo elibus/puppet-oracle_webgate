@@ -12,7 +12,6 @@ class oracle_webgate::params (
   $passphrase        = undef,
   $remoteRepo        = undef,
   $installPackage    = undef,
-  $version           = undef,
   $manageDeps        = true,
   $certFile          = 'puppet:///modules/oracle_webgate/certFile.pem',
   $keyFile           = 'puppet:///modules/oracle_webgate/keyFile.pem',

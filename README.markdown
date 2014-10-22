@@ -29,17 +29,6 @@ This is what it does:
  - Run the installa process
  - Run the configuration process
 
-This module has been tested on: 
- - RedHat 6+ 64 bit + OAM Webgate for Apache 2.4
-
-It *should* work also on:
- - 32 bits RedHat systems with Apache 2.2
-
-It is compatibile with:
- - Puppet >= 2.7.0
- - Ruby >= 1.8.7
-
-
 ##Setup
 
 ###What oracle_webgate affects
@@ -48,15 +37,14 @@ Notes:
  - The software will be installed in the default installation path, i.e. `/opt/netgate/access`, this cannot be changed
  - This module will install `libstc++.i686` *and* upgrade `libstc++.x86_64` to the last version to be sure puppet does not fail installing `libstc++.i686` when a version newer than the `libstc++.x86_64` one is available (see https://projects.puppetlabs.com/issues/23245)
 
-###Setup Requirements **OPTIONAL**
-
- 
-###Beginning with oracle_webgate
+###Setup Requirements
 
 Before you start, you need:
  - a working OAM server
  - OAM Certificates copied either on your puppet server on available in hiera
  - OAM Webgate installation ZIP file available on a http/https repository
+
+###Beginning with oracle_webgate
 
 The very basic steps needed for a user to get the module up and running. 
 
@@ -71,7 +59,8 @@ The very basic steps needed for a user to get the module up and running.
         installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip',
       }
 
-Defaults
+
+Defaults:
 
 | Option      | Defaults to                                     | Description                                               |
 |-------------|-------------------------------------------------|-----------------------------------------------------------|
@@ -83,6 +72,7 @@ Defaults
 |defaultLang  | en-us                                           |                                                           |
 |installLang  | en-us                                           |                                                           |
 |securityMode | cert                                            | See Oracle docs                                           |
+
 
 ##Usage
 
@@ -100,12 +90,16 @@ Here, list the classes, types, providers, facts, etc contained in your module. T
 
 ##Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+This module has been tested on: 
+ - RedHat 6+ 64 bit + OAM Webgate for Apache 2.4
+
+It *should* work also on:
+ - 32 bits RedHat systems with Apache 2.2
+
+It is compatibile with:
+ - Puppet >= 2.7.0
+ - Ruby >= 1.8.7
 
 ##Development
 
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
-
-##Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
+See https://github.com/elibus/puppet-oracle_webgate/blob/master/CONTRIBUTING.md

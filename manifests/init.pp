@@ -52,28 +52,27 @@ class oracle_webgate (
   $installLang       = $oracle_webgate::params::installLang,
   $securityMode      = $oracle_webgate::params::securityMode
 ) inherits oracle_webgate::params {
-
-  # validate parameters here
-  validate_string($oracle_webgate::serverId)
-  validate_string($oracle_webgate::hostname)
-  validate_re($oracle_webgate::port, '\d+')
-  validate_string($oracle_webgate::webgateId)
-  validate_string($oracle_webgate::password)
-  validate_string($oracle_webgate::passphrase)
-  validate_string($oracle_webgate::certFile)
-  validate_string($oracle_webgate::keyFile)
-  validate_string($oracle_webgate::chainFile)
-  validate_string($oracle_webgate::installPackage)
-  validate_string($oracle_webgate::remoteRepo)
-  validate_absolute_path($oracle_webgate::downloadDir)
-  validate_string($oracle_webgate::user)
-  validate_string($oracle_webgate::group)
-  validate_string($oracle_webgate::defaultLang)
-  validate_string($oracle_webgate::installLang)
-  validate_string($oracle_webgate::securityMode)
-
   $continue = ! str2bool($::oracle_webgate_exists)
   if ( $continue ) {
+    # validate parameters here
+    validate_string($oracle_webgate::serverId)
+    validate_string($oracle_webgate::hostname)
+    validate_re($oracle_webgate::port, '\d+')
+    validate_string($oracle_webgate::webgateId)
+    validate_string($oracle_webgate::password)
+    validate_string($oracle_webgate::passphrase)
+    validate_string($oracle_webgate::certFile)
+    validate_string($oracle_webgate::keyFile)
+    validate_string($oracle_webgate::chainFile)
+    validate_string($oracle_webgate::installPackage)
+    validate_string($oracle_webgate::remoteRepo)
+    validate_absolute_path($oracle_webgate::downloadDir)
+    validate_string($oracle_webgate::user)
+    validate_string($oracle_webgate::group)
+    validate_string($oracle_webgate::defaultLang)
+    validate_string($oracle_webgate::installLang)
+    validate_string($oracle_webgate::securityMode)
+
     class { 'oracle_webgate::dependencies': } ->
     class { 'oracle_webgate::install': }      ->
     class { 'oracle_webgate::config': }       ->

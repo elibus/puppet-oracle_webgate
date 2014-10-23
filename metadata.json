@@ -1,6 +1,6 @@
 {
   "name": "marco-oracle_webgate",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Marco Tizzoni",
   "summary": "Install and configure Oracle Webgate",
   "license": "Apache 2.0",

@@ -1,10 +1,10 @@
-name          'marco-oracle_webgate'
+name          'elibus-oracle_webgate'
 version       '0.1.0'
-source        'https://github.com/elibus/elibus-oracle_webgate'
+source        'https://github.com/elibus/puppet-oracle_webgate'
 author        'Marco Tizzoni'
 license       'Apache 2.0'
 summary       'Install and configure Oracle Webgate'
 description   ''
-project_page  'https://github.com/elibus/elibus-oracle_webgate'
+project_page  'https://github.com/elibus/puppet-oracle_webgate'
 
 dependency 'puppetlabs/stdlib'

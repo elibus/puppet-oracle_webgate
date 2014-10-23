@@ -39,7 +39,6 @@ class oracle_webgate (
   validate_string($oracle_webgate::keyFile)
   validate_string($oracle_webgate::chainFile)
   validate_string($oracle_webgate::installPackage)
-  validate_string($oracle_webgate::version)
   validate_bool($oracle_webgate::manageDeps)
   validate_string($oracle_webgate::remoteRepo)
   validate_absolute_path($oracle_webgate::downloadDir)

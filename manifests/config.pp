@@ -17,9 +17,10 @@ class oracle_webgate::config {
       -h ${oracle_webgate::hostname} \
       -p ${oracle_webgate::port} \
       -a ${oracle_webgate::serverId} \
-      -r ${oracle_webgate::passphrase}",
+      -r ${oracle_webgate::passphrase} && \
+      touch ${oracle_webgate::installLocation}/.puppet-oracle_webgate-configured",
     path      => $execPath,
-    creates   => "${oracle_webgate::installLocation}/oblix/config/random-seed",
+    creates   => "${oracle_webgate::installLocation}/.puppet-oracle_webgate-configured",
     logoutput => true
   }
 

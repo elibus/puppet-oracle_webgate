@@ -23,7 +23,7 @@ Oracle Access Manager Webgate has a really crappy installation process, this mod
 This is what it does:
  - Download the installation package from a remore repository (http/https)
  - Create a temp dir where to extract the required content
- - Install the necessary dependencies (optional)
+ - Ensure the necessary dependencies are installed
  - Copy the system libs requirered by the install (please refer to: http://docs.oracle.com/cd/E15217_01/doc.1014/e12493.pdf)
  - Copy the OAM certificates
  - Run the installa process
@@ -76,12 +76,19 @@ Defaults:
 ##Usage
 
 The module does not require any special configuration besides what just showed.
-If you are using puppet 3.0+ you can take the most out of the hiera integration saving your certificates in your hiera data folder, something like this:
+If you are using puppet 3.0+ you can take the most out of the hiera integration installing the hiera-file backend. An example might shade some light:
+ - Leave the `oracle_webgate::*` variable undefined
+ - Create a hiera structure like the following:
+        /etc/puppet/hiera/data/default
+          oracle_webgate.d/
+            oracle_webgate::certFile
+            oracle_webgate::keyFile
+            oracle_webgate::chainFile
+ - Hiera searches for a file called `oracle_webgate.d/oracle_webgate::certFile` in your hiera data folder providing the file content as content for the variable
 
-      common/
-        oracle_webgate::certFile
-        oracle_webgate::keyFile
-        oracle_webgate::chainFile
+ The outcome is... the file is copied on the client!
+
+
 
 ##Reference
 

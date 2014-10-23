@@ -4,7 +4,7 @@
 #
 class oracle_webgate::dependencies {
   notify { 'oracle_webgate not found!': }
-  ensure_packages($oracle_webgate::params::dependencies, {
+  ensure_packages($oracle_webgate::params::deps, {
       ensure => 'installed'
     }
   )

@@ -23,7 +23,6 @@ class oracle_webgate::params (
   $install           = 'install',
   $autoUpdate        = 'No',
   $launchBrowser     = 'No',
-  $dependencies      = 'libstdc++.i686',
   )
   {
   case $::osfamily {

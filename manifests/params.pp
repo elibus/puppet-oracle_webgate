@@ -12,7 +12,6 @@ class oracle_webgate::params (
   $passphrase        = undef,
   $remoteRepo        = undef,
   $installPackage    = undef,
-  $manageDeps        = true,
   $certFile          = 'puppet:///modules/oracle_webgate/certFile.pem',
   $keyFile           = 'puppet:///modules/oracle_webgate/keyFile.pem',
   $chainFile         = 'puppet:///modules/oracle_webgate/chainFile.pem',
@@ -44,9 +43,11 @@ class oracle_webgate::params (
   case $::architecture {
     'x86_64': {
       $libdir = 'lib64'
+      $deps = [ 'libstdc++.x86_64', 'libstdc++.i686' ]
     }
     'i686': {
       $libdir = 'lib'
+      $deps = 'libstdc++.i686'
     }
     default: {
       fail("${::architecture} architecture not supported")

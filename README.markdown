@@ -35,7 +35,7 @@ This is what it does:
 Notes:
  - The (crappy) Oracle installer *requires* a copy of `libgcc_s.so.1` and `libstdc++.so.6` in a specified directory to work properly. The module will take care of copying those files if they are available
  - The software will be installed in the default installation path, i.e. `/opt/netgate/access`, this cannot be changed
- - This module will install `libstc++.i686` *and* upgrade `libstc++.x86_64` to the last version to be sure puppet does not fail installing `libstc++.i686` when a version newer than the `libstc++.x86_64` one is available (see https://projects.puppetlabs.com/issues/23245)
+ - This module will install `libstc++.i686` and `libstc++.x86_64` on 64 bit systems. Puppet might fail because of multilib if a  `libstc++.i686` version newer than the `libstc++.x86_64` already installed is available (see https://projects.puppetlabs.com/issues/23245)
 
 ###Setup Requirements
 
@@ -46,7 +46,7 @@ Before you start, you need:
 
 ###Beginning with oracle_webgate
 
-The very basic steps needed for a user to get the module up and running. 
+The very basic steps needed for a user to get the module up and running.
 
       class { 'oracle_webgate':
         serverId        => 'oamServerId',
@@ -64,7 +64,6 @@ Defaults:
 
 | Option      | Defaults to                                     | Description                                               |
 |-------------|-------------------------------------------------|-----------------------------------------------------------|
-|manageDeps   | true                                            | Should I install libstc++.i686?                           |
 |certFile     | puppet:///modules/oracle_webgate/certFile.pem   | Certificate file                                          |
 |keyFile      | puppet:///modules/oracle_webgate/keyFile.pem    | Key file                                                  |
 |chainFile    | puppet:///modules/oracle_webgate/chainFile.pem  | Chain file                                                |
@@ -90,7 +89,7 @@ Here, list the classes, types, providers, facts, etc contained in your module. T
 
 ##Limitations
 
-This module has been tested on: 
+This module has been tested on:
  - RedHat 6+ 64 bit + OAM Webgate for Apache 2.4
 
 It *should* work also on:

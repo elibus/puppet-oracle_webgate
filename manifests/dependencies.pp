@@ -1,15 +1,11 @@
 # == Class oracle_webgate::dependencies
 #
-# This class is called from oracle_webgate::dependencies
+# This class is called from oracle_webgate
 #
 class oracle_webgate::dependencies {
-  package { 'libstdc++.i686':
-    ensure  => installed,
-    require => Package['libstdc++.x86_64']
-  }
-
-  package { 'libstdc++.x86_64':
-    ensure   => latest,
-    provider => 'yum'
-  }
+  notify {'oracle_webgate not found!':}
+  ensure_packages($oracle_webgate::params::dependencies, {
+      ensure => 'installed'
+    }
+  )
 }

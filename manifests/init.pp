@@ -44,7 +44,6 @@ class oracle_webgate (
   $keyFile           = $oracle_webgate::params::keyFile,
   $chainFile         = $oracle_webgate::params::chainFile,
   $installPackage    = $oracle_webgate::params::installPackage,
-  $manageDeps        = $oracle_webgate::params::manageDeps,
   $remoteRepo        = $oracle_webgate::params::remoteRepo,
   $downloadDir       = $oracle_webgate::params::downloadDir,
   $user              = $oracle_webgate::params::user,
@@ -65,7 +64,6 @@ class oracle_webgate (
   validate_string($oracle_webgate::keyFile)
   validate_string($oracle_webgate::chainFile)
   validate_string($oracle_webgate::installPackage)
-  validate_bool($oracle_webgate::manageDeps)
   validate_string($oracle_webgate::remoteRepo)
   validate_absolute_path($oracle_webgate::downloadDir)
   validate_string($oracle_webgate::user)
@@ -74,17 +72,11 @@ class oracle_webgate (
   validate_string($oracle_webgate::installLang)
   validate_string($oracle_webgate::securityMode)
 
-  if ( str2bool($::oracle_webgate_exists) != true ) {
-    notify {'oracle_webgate not found!':}
-
-    if ( $oracle_webgate::manageDeps ) {
-      class { 'oracle_webgate::dependencies':
-        before => Class['oracle_webgate::install']
-      }
-    }
-
-    class { 'oracle_webgate::install': } ->
-    class { 'oracle_webgate::config': }  ->
+  $continue = ! str2bool($::oracle_webgate_exists)
+  if ( $continue ) {
+    class { 'oracle_webgate::dependencies': } ->
+    class { 'oracle_webgate::install': }      ->
+    class { 'oracle_webgate::config': }       ->
     Class['oracle_webgate']
   }
 }

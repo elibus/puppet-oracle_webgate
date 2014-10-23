@@ -1,11 +1,37 @@
 # == Class: oracle_webgate
 #
-# Full description of class oracle_webgate here.
+# This class will install and configure Oracle Access Manager Webgate for
+# Apache on Linux.
 #
 # === Parameters
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
+# Minimal example:
+# class { 'oracle_webgate':
+#    serverId        => 'oamServerId',
+#    hostname        => 'oam.example.com',
+#    webgateId       => 'thisServer',
+#    port            => '5575',
+#    password        => 'password',
+#    passphrase      => 'passphrase',
+#    remoteRepo      => 'https://www.example.com/repo/oracle',
+#    installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip',
+#  }
+#
+# Option defaults
+# * manageDeps    true
+#     Should I install libstc++.i686?
+# * certFile      puppet:///modules/oracle_webgate/certFile.pem
+#     Certificate file
+# * keyFile       puppet:///modules/oracle_webgate/keyFile.pem
+#     Key file
+# * chainFile     puppet:///modules/oracle_webgate/chainFile.pem
+#     Chain file
+# * downloadDir   /tmp/oracle_webgate_install
+#     Temp dir where to download and unzip installation files
+# * defaultLang   en-us
+# * installLang   en-us
+# * securityMode  cert
+#     See Oracle docs
 #
 class oracle_webgate (
   $serverId          = $oracle_webgate::params::serverId,

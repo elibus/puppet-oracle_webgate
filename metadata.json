@@ -12,5 +12,33 @@
       "name": "puppetlabs-stdlib",
       "version_requirement": ">= 1.0.0"
     }
+  ],
+  "operatingsystem_support": [
+    {
+       "operatingsystem": "RedHat",
+       "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+       "operatingsystem": "CentOS",
+       "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": " >= 2.7"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
   ]
 }

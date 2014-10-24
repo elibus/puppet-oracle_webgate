@@ -79,6 +79,7 @@ The module does not require any special configuration besides what just showed.
 If you are using puppet 3.0+ you can take the most out of the hiera integration installing the hiera-file backend. An example might shade some light:
  - Leave the `oracle_webgate::*` variable undefined
  - Create a hiera structure like the following:
+ 
         /etc/puppet/hiera/data/default
           oracle_webgate.d/
             oracle_webgate::certFile

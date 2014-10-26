@@ -79,7 +79,7 @@ The module does not require any special configuration besides what just showed.
 If you are using puppet 3.0+ you can take the most out of the hiera integration installing the hiera-file backend. An example might shade some light:
  - Leave the `oracle_webgate::*` variable undefined
  - Create a hiera structure like the following:
- 
+
         /etc/puppet/hiera/data/default
           oracle_webgate.d/
             oracle_webgate::certFile
@@ -93,6 +93,9 @@ If you are using puppet 3.0+ you can take the most out of the hiera integration 
 
 ##Reference
 
+### Classes
+
+### Facts
 Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
 
 ##Limitations
@@ -103,9 +106,6 @@ This module has been tested on:
 It *should* work also on:
  - 32 bits RedHat systems with Apache 2.2
 
-It is compatibile with:
- - Puppet >= 2.7.0
- - Ruby >= 1.8.7
 
 ##Development
 

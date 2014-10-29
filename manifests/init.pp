@@ -44,6 +44,8 @@ class oracle_webgate (
   $keyFile           = $oracle_webgate::params::keyFile,
   $chainFile         = $oracle_webgate::params::chainFile,
   $installPackage    = $oracle_webgate::params::installPackage,
+  $patchPackage      = $oracle_webgate::params::patchPackage,
+  $patchVersion      = $oracle_webgate::params::patchVersion,
   $remoteRepo        = $oracle_webgate::params::remoteRepo,
   $downloadDir       = $oracle_webgate::params::downloadDir,
   $user              = $oracle_webgate::params::user,
@@ -65,6 +67,7 @@ class oracle_webgate (
     validate_string($oracle_webgate::keyFile)
     validate_string($oracle_webgate::chainFile)
     validate_string($oracle_webgate::installPackage)
+    validate_re($oracle_webgate::patchVersion, '\d+')
     validate_string($oracle_webgate::remoteRepo)
     validate_absolute_path($oracle_webgate::downloadDir)
     validate_string($oracle_webgate::user)
@@ -76,6 +79,19 @@ class oracle_webgate (
     class { 'oracle_webgate::dependencies': } ->
     class { 'oracle_webgate::install': }      ->
     class { 'oracle_webgate::config': }       ->
+    class { 'oracle_webgate::cleanup': }      ->
     Class['oracle_webgate']
+
+    if ( $patchVersion > 0 ) {
+      validate_string($oracle_webgate::patchPackage)
+      validate_re($oracle_webgate::patchPackage, '.+')
+      $actualPatchVersion = ($::oracle_webgate_patch)
+      if ( $patchVersion > $actualPatchVersion ) {
+        notify { "Found patch version: ${actualPatchVersion}, required is ${patchVersion}. Installing... ": }
+
+        Class['oracle_webgate::config'] ->
+        class { 'oracle_webgate::patch': }
+      }
+    }
   }
 }

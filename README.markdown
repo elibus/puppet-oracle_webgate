@@ -59,6 +59,20 @@ The very basic steps needed for a user to get the module up and running.
         installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE24_WebGate.zip',
       }
 
+This is a full example with bundle patch for Apache 2.2.
+
+      class { 'oracle_webgate':
+        serverId        => 'oamServerId',
+        hostname        => 'oam.example.com',
+        webgateId       => 'thisServer',
+        port            => '5575',
+        password        => 'password',
+        passphrase      => 'passphrase',
+        remoteRepo      => 'https://www.example.com/repo/oracle',
+        installPackage  => 'Oracle_Access_Manager10_1_4_3_0_linux64_APACHE22_WebGate.zip',
+        patchPackage    => 'Oracle_Access_Manager10_1_4_3_0_BP13_Patch_linux64_APACHE22_WebGate.zip',
+        patchVersion    => '13',
+      }
 
 Defaults:
 
@@ -71,6 +85,11 @@ Defaults:
 |defaultLang  | en-us                                           |                                                           |
 |installLang  | en-us                                           |                                                           |
 |securityMode | cert                                            | See Oracle docs                                           |
+|patchVersion | 0                                               | Version of the bundle patch                               |
+
+###Removing oracle_webgate
+
+To fully remove the Oracle Webgate just include the class `oracle_webgate:uninstall`.
 
 
 ##Usage

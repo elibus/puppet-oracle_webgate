@@ -1,5 +1,5 @@
 name          'elibus-oracle_webgate'
-version       '0.2.1'
+version       '0.2.2'
 source        'https://github.com/elibus/puppet-oracle_webgate'
 author        'Marco Tizzoni'
 license       'Apache 2.0'

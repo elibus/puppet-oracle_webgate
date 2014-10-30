@@ -1,3 +1,7 @@
+2014-10-29 Release 0.2.2
+- Add unzip/wget as dependencies
+2014-10-29 Release 0.2.1
+- Fix facter regexp for working on non digit version
 2014-10-29 Release 0.2.0
 - Add support for bundle patch
 2014-10-23 Release 0.1.3

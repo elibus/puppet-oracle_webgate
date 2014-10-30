@@ -6,7 +6,7 @@ class oracle_webgate::cleanup {
   exec { "removing temp files: ${oracle_webgate::downloadDir}/":
     command => "rm -fr ${oracle_webgate::downloadDir}",
     path    => $execPath,
-    unless  => "! test -d ${oracle_webgate::downloadDir}"
+    onlyif  => "test -d ${oracle_webgate::downloadDir}"
   }
 
 }

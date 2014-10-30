@@ -120,7 +120,8 @@ Here, list the classes, types, providers, facts, etc contained in your module. T
 ##Limitations
 
 This module has been tested on:
- - RedHat 6+ 64 bit + OAM Webgate for Apache 2.4
+ - RedHat 7 64 bit + OAM Webgate for Apache 2.4
+ - RedHat 6 64 bit + OAM Webgate for Apache 2.2
 
 It *should* work also on:
  - 32 bits RedHat systems with Apache 2.2

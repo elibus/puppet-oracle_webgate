@@ -44,11 +44,11 @@ class oracle_webgate::params (
   case $::architecture {
     'x86_64': {
       $libdir = 'lib64'
-      $deps = [ 'libstdc++.x86_64', 'libstdc++.i686', 'tcsh' ]
+      $deps = [ 'libstdc++.x86_64', 'libstdc++.i686', 'tcsh', 'wget', 'unzip' ]
     }
     'i686': {
       $libdir = 'lib'
-      $deps = [ 'libstdc++.i686', 'tcsh']
+      $deps = [ 'libstdc++.i686', 'tcsh', 'wget', 'unzip' ]
     }
     default: {
       fail("${::architecture} architecture not supported")

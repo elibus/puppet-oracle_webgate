@@ -43,6 +43,9 @@ describe 'oracle_webgate' do
 
         it { should contain_package('libstdc++.x86_64') }
         it { should contain_package('libstdc++.i686') }
+        it { should contain_package('wget') }
+        it { should contain_package('unzip') }
+        it { should contain_package('tcsh') }
 
         it { should contain_exec('create /tmp/oracle_webgate_install directory') }
         it { should contain_exec('copy to /tmp/oracle_webgate_install/libgcc_s.so.1') }

@@ -34,7 +34,7 @@ This is what it does:
 ###What oracle_webgate affects
 Notes:
  - The (crappy) Oracle installer *requires* a copy of `libgcc_s.so.1` and `libstdc++.so.6` in a specified directory to work properly. The module will take care of copying those files if they are available
- - The software will be installed in the default installation path, i.e. `/opt/netgate/access`, this cannot be changed
+ - The software will be installed in the default installation path, i.e. `/opt/netpoint/access`, this cannot be changed
  - This module will install `libstc++.i686` and `libstc++.x86_64` on 64 bit systems. Puppet might fail because of multilib if a  `libstc++.i686` version newer than the `libstc++.x86_64` already installed is available (see https://projects.puppetlabs.com/issues/23245)
 
 ###Setup Requirements

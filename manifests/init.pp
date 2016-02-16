@@ -87,7 +87,9 @@ class oracle_webgate (
       validate_re($oracle_webgate::patchPackage, '.+')
       $actualPatchVersion = ($::oracle_webgate_patch)
       if ( $patchVersion > $actualPatchVersion ) {
-        notify { "Found patch version: ${actualPatchVersion}, required is ${patchVersion}. Installing... ": }
+        notify {
+          "Found patch version: ${actualPatchVersion}, required is ${patchVersion}. Installing... ":
+        }
 
         Class['oracle_webgate::config'] ->
         class { 'oracle_webgate::patch': }

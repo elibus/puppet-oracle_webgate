@@ -1,17 +1,13 @@
 {
   "name": "marco-oracle_webgate",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "author": "Marco Tizzoni",
   "summary": "Install and configure Oracle Webgate",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "source": "https://github.com/elibus/elibus-oracle_webgate",
-  "project_page": "https://github.com/elibus/elibus-oracle_webgate",
-  "issues_url": "https://github.com/elibus/elibus-oracle_webgate/issues",
+  "project_page": "https://github.com/elibus/puppet-oracle_webgate",
+  "issues_url": "https://github.com/elibus/puppet-oracle_webgate/issues",
   "dependencies": [
-    {
-      "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 1.0.0"
-    }
   ],
   "operatingsystem_support": [
     {

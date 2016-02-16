@@ -1,10 +1,10 @@
 {
   "name": "elibus-oracle_webgate",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "author": "Marco Tizzoni",
   "summary": "Install and configure Oracle Webgate",
   "license": "Apache-2.0",
-  "source": "https://github.com/elibus/elibus-oracle_webgate",
+  "source": "https://github.com/elibus/puppet-oracle_webgate",
   "project_page": "https://github.com/elibus/puppet-oracle_webgate",
   "issues_url": "https://github.com/elibus/puppet-oracle_webgate/issues",
   "dependencies": [

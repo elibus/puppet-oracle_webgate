@@ -1,6 +1,6 @@
 {
   "name": "elibus-oracle_webgate",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "author": "Marco Tizzoni",
   "summary": "Install and configure Oracle Webgate",
   "license": "Apache-2.0",
@@ -38,7 +38,11 @@
     },
     {
       "name": "puppet",
-      "version_requirement": "4.x"
+      "version_requirement": "3.8"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "4.2"
     }
   ]
 }
